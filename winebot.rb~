@@ -1,0 +1,10 @@
+require 'twitter'
+
+module Winebot
+  def runner
+    responder = Twitter::Base.new('testtobot', 'lucky1')
+    Twitter::Search.new.to('testbot').each do |new_request|
+      responder.update("@#{new_request["from_user"]} I'm not drinking Bacon Merlot!")
+    end
+  end
+end
