@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'twitter'
 require 'dm-core'
+require 'configatron'
+
+require 'config'
 
 module Winebot
   def self.last_id
@@ -19,14 +22,14 @@ module Winebot
   
   def self.runner
     DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/db/winebot.db")
-    Twitter::Search.new.since(self.last_id).to('testtobot').each do |new_request|
+    Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
       self.send_response(new_request)
       self.set_last_id(new_request["id"])
     end
   end
   
   def self.send_response(request)
-    responder = Twitter::Base.new('testtobot', 'lucky1')
+    responder = Twitter::Base.new(configatron.twittername, configatron.password)
     responder.update("@#{request["from_user"]} #{self.response(request)}")
   end
   
