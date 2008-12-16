@@ -1,13 +1,18 @@
 require 'rubygems'
 require 'twitter'
 require 'dm-core'
+#require 'dm-more'
+require 'dm-is-searchable'
+require 'dm-sphinx-adapter'
 require 'configatron'
 
 require 'config'
+require 'lib/models'
+require 'lib/responder'
 
 module Winebot
   def self.last_id
-    id = 1052887557
+    id = 1052887557 #just a default
     File.open("./last_id", "r") do |f|
       id = f.read
     end rescue nil
@@ -21,7 +26,10 @@ module Winebot
   end
   
   def self.runner
-    DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/db/winebot.db")
+    #DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/db/winebot.db")
+    DataMapper.setup(:default, "mysql:///winebot")
+    DataMapper.setup(:search, 'sphinx://localhost:3312')
+
     Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
       self.send_response(new_request)
       self.set_last_id(new_request["id"])
@@ -34,45 +42,7 @@ module Winebot
   end
   
   def self.response(request)
-    return Responder.new(request["text"]).to_s
-  end
-
-  class Responder
-    def initialize(input)
-      @input
-    end
-
-    def to_s #this is where the cleverness of the parser is revealed in a brililant wine choice
-      "xxxyyyy"
-    end
-  end
-
-  class Wine
-    include DataMapper::Resource
-    property :id,         Integer, :serial => true
-    property :text,       String
-    property :url,        String
-    property :created_at, DateTime
-    has n, :suggestions
-    has n, :entrees, :through => :suggestions
-  end
-
-  class Entree
-    include DataMapper::Resource
-    property :id,         Integer, :serial => true
-    property :name,       String
-    property :created_at, DateTime
-    has n, :suggestions
-    has n, :wines, :through => :suggestions
-  end
-
-  class Suggestion
-    include DataMapper::Resource
-    property :id,         Integer, :serial => true
-    property :created_at, DateTime
-    property :is_active,  Boolean
-    belongs_to :entree
-    belongs_to :wine
+    return Responder.new(request["text"])
   end
 end
 
