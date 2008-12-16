@@ -9,6 +9,7 @@ require 'configatron'
 require 'config'
 require 'lib/models'
 require 'lib/responder'
+require 'lib/ws_daily_feeder'
 
 module Winebot
   def self.last_id
@@ -46,4 +47,4 @@ module Winebot
   end
 end
 
-Winebot.runner
+#Winebot.runner
