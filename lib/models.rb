@@ -1,3 +1,5 @@
+require File.join(File.dirname(__FILE__), '..', 'winebot.rb')
+
 module Winebot
   class Wine
     include DataMapper::Resource
