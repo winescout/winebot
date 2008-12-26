@@ -7,7 +7,8 @@ require 'dm-sphinx-adapter'
 require 'configatron'
 
 require 'config'
-require 'lib/models'
+require 'lib/models/wine'
+require 'lib/models/feed'
 require 'lib/responder'
 require 'lib/ws_daily_feeder'
 
