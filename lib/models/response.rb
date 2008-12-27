@@ -21,10 +21,14 @@ module Winebot
       end
       keyword_list.flatten!.compact!      
       update_my_keywords(keyword_list)
-      
-      wine = Wine.search(:full_description => self.keywords)
-      wine = Wine.search(:full_description => default_search) unless wine
+      wine = search_result(self.keywords)
+      wine = search_result(default_search) unless wine
       return wine
+    end
+
+    def search_result(search_string)
+      wines = Wine.search(:full_description => search_string)
+      wines.length > 0 ? wines[0] : nil
     end
 
     def update_my_keywords(keywords)
