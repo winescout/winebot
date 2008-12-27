@@ -1,32 +1,19 @@
 module Winebot
-  class FeedParser
-    attr_accessor :item
-    def self.parse(item)
-      self.new(:item => item)
+  class WSDailyFeeder < FeedParser
+    def unique_key
+      Digest::SHA1.hexdigest(self.item.title)
     end
 
-    def unique_key
-      raise "Not Implimented"
-    end
-    
-    def text 
-      raise "Not Implimented"
+    def text
+      self.item.title
     end
 
     def full_description
-      raise "Not Implimented"
+      self.item.description
     end
 
     def url
-      raise "Not Implimented"
+      self.item.link
     end
-
-    def created_at
-      raise "Not Implimented"
-    end
-  end
-
-  class WSDailyFeeder < FeedParser
-    
   end
 end

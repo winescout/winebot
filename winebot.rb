@@ -10,6 +10,7 @@ require 'config'
 require 'lib/models/wine'
 require 'lib/models/feed'
 require 'lib/responder'
+require 'lib/feed_parser'
 require 'lib/ws_daily_feeder'
 
 module Winebot
