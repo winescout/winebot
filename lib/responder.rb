@@ -6,7 +6,7 @@ module Winebot
     end
 
     def to_s 
-      "#{@response.wine.text} - #{@response.wine.url}"
+      "#{@response.suggestion.text} - #{@response.suggestion.url}"
     end
   end
 end

@@ -6,7 +6,7 @@ describe Winebot::Responder do
     @wine = Winebot::Wine.new
     @wine.stub!(:text).and_return("text")
     @wine.stub!(:url).and_return("http://www.wine.com")
-    @response.stub!(:wine).and_return(@wine)
+    @response.stub!(:suggestion).and_return(@wine)
     Winebot::Response.stub!(:new).and_return(@response)
   end
 
