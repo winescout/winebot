@@ -9,7 +9,6 @@ describe Winebot::Feed do
 
     before do 
       @feed = Winebot::Feed.new(:url => "http://test.com/feed_url.xml")
-      @feed = Winebot::Feed.new(:url => "http://www.winespectator.com/RSS/wod_rss/0,4007,,00.xml")
       @feed_content = File.read(File.join(File.dirname(__FILE__), '..', 'fixtures', 'ws_daily_feed.xml'))
       @parsed_items = RSS::Parser.parse(@feed_content).items
       @feed.stub!(:items).and_return(@parsed_items)
