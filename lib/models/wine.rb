@@ -9,5 +9,7 @@ module Winebot
     property :full_description, String
     property :url,        String
     property :created_at, DateTime
+
+    has n, :responses
   end
 end

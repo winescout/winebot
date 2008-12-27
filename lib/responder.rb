@@ -2,10 +2,11 @@ module Winebot
   class Responder
     def initialize(input)
       @input = input
+      @response = Response.new(input)
     end
 
-    def to_s #this is where the cleverness of the parser is revealed in a brililant wine choice
-      "xxxyyyy"
+    def to_s 
+      "#{@response.wine.text} - #{@response.wine.url}"
     end
   end
 end
