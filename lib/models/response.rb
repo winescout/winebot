@@ -10,6 +10,7 @@ module Winebot
 
     def suggestion
       self.wine = lookup_wine unless wine
+      save
       return wine
     end
 
