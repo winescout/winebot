@@ -6,8 +6,8 @@ module Winebot
     property :id,         Integer, :serial => true
     property :unique_key, String
     property :text,       String, :length => 140
-    property :full_description, String, :length => 255
-    property :url,        String
+    property :full_description, String, :length => 1000
+    property :url,        String, :length => 255
     property :created_at, DateTime
 
     has n, :responses
