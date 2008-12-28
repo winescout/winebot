@@ -1,0 +1,10 @@
+# Twitter
+configatron.twittername = "twittername"
+configatron.password = 'password'
+
+# Database
+configatron.db_adapter = 'mysql'
+configatron.db_server = 'localhost'
+configatron.db_name = 'winebot'
+configatron.db_username = 'username'
+configatron.db_password = 'p@ssw0rd'

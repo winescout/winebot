@@ -6,7 +6,7 @@ require 'dm-is-searchable'
 require 'dm-sphinx-adapter'
 require 'configatron'
 
-require 'config'
+require 'config/config'
 require 'lib/models/wine'
 require 'lib/models/feed'
 require 'lib/models/response'
@@ -33,8 +33,7 @@ module Winebot
   end
   
   def self.runner
-    #DataMapper.setup(:default, "sqlite3:///#{Dir.pwd}/db/winebot.db")
-    DataMapper.setup(:default, "mysql:///winebot")
+    DataMapper.setup(:default, "#{configatron.db_adapter}://#{configatron.db_username}:#{configatron.db_password}@#{configatron.db_server}/#{configatron.db_name}")
     DataMapper.setup(:search, 'sphinx://localhost:3312')
 
     Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
