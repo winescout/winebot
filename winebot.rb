@@ -32,10 +32,13 @@ module Winebot
     end
   end
   
-  def self.runner
+  def self.db_setup
     DataMapper.setup(:default, "#{configatron.db_adapter}://#{configatron.db_username}:#{configatron.db_password}@#{configatron.db_server}/#{configatron.db_name}")
     DataMapper.setup(:search, 'sphinx://localhost:3312')
+  end
 
+  def self.runner
+    self.db_setup
     Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
       self.send_response(new_request)
       self.set_last_id(new_request["id"])
