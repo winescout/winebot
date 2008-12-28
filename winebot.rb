@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'twitter'
 require 'dm-core'
+require 'dm-validations'
 #require 'dm-more'
 require 'dm-is-searchable'
 require 'dm-sphinx-adapter'
