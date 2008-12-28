@@ -5,7 +5,7 @@ module Winebot
   class Feed
     include DataMapper::Resource
     property :id, Integer, :serial => true
-    property :url, String
+    property :url, String, :length => 255
     property :feed_handler, String #handler class to pass instances off to for parsing
 
     def fetch_wines
