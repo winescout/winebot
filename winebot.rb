@@ -6,6 +6,7 @@ require 'dm-validations'
 require 'dm-is-searchable'
 require 'dm-sphinx-adapter'
 require 'configatron'
+require 'beanstalk-client'
 
 require 'config/config'
 require 'lib/models/wine'
@@ -19,6 +20,16 @@ require 'lib/feed_parser'
 require 'lib/ws_daily_feeder'
 
 module Winebot
+  def self.feed_queue
+    unless @beanstalk 
+      @beanstalk = Beanstalk::Pool.new(['localhost:11300'])
+      @beanstalk.watch('feed_queue')
+      @beanstalk.use('feed_queue')
+      @beanstalk.ignore('default')
+    end
+    return @beanstalk
+  end
+
   def self.last_id
     id = 1052887557 #just a default
     File.open("./last_id", "r") do |f|
