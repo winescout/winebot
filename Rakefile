@@ -7,5 +7,5 @@ end
 
 task :check_feeds do 
   Winebot.db_setup
-  Winebot::Feed.monitor_all
+  Feed.monitor_all
 end

@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 require 'digest/sha1'
 
-describe Winebot::WSDailyFeeder do 
+describe WSDailyFeeder do 
   before do 
     @item = mock("RSS parsed item",
                  :title => "title",
                  :link  => "url link",
                  :description => "desc",
                  :pubDate => Time.now)
-    @feeder = Winebot::WSDailyFeeder.new(@item)
+    @feeder = WSDailyFeeder.new(@item)
   end
 
   it "should parse unique_key" do 

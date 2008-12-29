@@ -1,23 +1,23 @@
 require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 
-describe Winebot::Responder do 
+describe Responder do 
   before do 
-    @response = Winebot::Response.new
-    @wine = Winebot::Wine.new
+    @response = Response.new
+    @wine = Wine.new
     @wine.stub!(:text).and_return("text")
     @wine.stub!(:url).and_return("http://www.wine.com")
     @response.stub!(:suggestion).and_return(@wine)
-    Winebot::Response.stub!(:new).and_return(@response)
+    Response.stub!(:new).and_return(@response)
   end
 
   it "should create a new respone" do 
-    Winebot::Response.should_receive(:new).and_return(@response)
-    Winebot::Responder.new("dinner")
+    Response.should_receive(:new).and_return(@response)
+    Responder.new("dinner")
   end
 
   describe "to_s" do 
     before do 
-      @responder = Winebot::Responder.new("dinner")
+      @responder = Responder.new("dinner")
     end
 
     it "should get wine's text" do 

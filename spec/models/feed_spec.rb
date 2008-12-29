@@ -2,13 +2,13 @@ require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 require 'rss'
 require 'open-uri'
 
-describe Winebot::Feed do 
+describe Feed do 
   
   describe "fetch new" do 
     class TestHandler; end
 
     before do 
-      @feed = Winebot::Feed.new(:url => "http://test.com/feed_url.xml")
+      @feed = Feed.new(:url => "http://test.com/feed_url.xml")
       @feed_content = File.read(File.join(File.dirname(__FILE__), '..', 'fixtures', 'ws_daily_feed.xml'))
       @parsed_items = RSS::Parser.parse(@feed_content).items
       @feed.stub!(:items).and_return(@parsed_items)
@@ -22,7 +22,7 @@ describe Winebot::Feed do
                       :url        => nil)
       TestHandler.stub!(:new).and_return(@handler)
 
-      Winebot::Wine.stub!(:create)
+      Wine.stub!(:create)
     end
     
     it "should pull the feed" do 
@@ -36,7 +36,7 @@ describe Winebot::Feed do
     end
 
     it "should attempt to create a new wine for each item" do 
-      Winebot::Wine.should_receive(:create)
+      Wine.should_receive(:create)
       @feed.fetch_wines
     end
 
@@ -54,9 +54,9 @@ describe Winebot::Feed do
                         :reserve => @job,
                         :yput => nil)
       Winebot.stub!(:feed_queue).and_return(@beanstalk)
-      @feed = Winebot::Feed.new
+      @feed = Feed.new
       @feed.stub!(:fetch_wines)
-      Winebot::Feed.stub!(:first).and_return(@feed)
+      Feed.stub!(:first).and_return(@feed)
     end
 
     it "should add feed to beanstalk" do 
