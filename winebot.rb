@@ -23,9 +23,9 @@ module Winebot
   def self.feed_queue
     unless @beanstalk 
       @beanstalk = Beanstalk::Pool.new(['localhost:11300'])
-      @beanstalk.watch('feed_queue')
-      @beanstalk.use('feed_queue')
-      @beanstalk.ignore('default')
+      #@beanstalk.watch('feed_queue')
+      #@beanstalk.use('feed_queue')
+      #@beanstalk.ignore('default')
     end
     return @beanstalk
   end
