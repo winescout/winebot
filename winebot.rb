@@ -8,16 +8,16 @@ require 'dm-sphinx-adapter'
 require 'configatron'
 require 'beanstalk-client'
 
-require 'config/config'
-require 'lib/models/wine'
-require 'lib/models/feed'
-require 'lib/models/response'
-require 'lib/models/keyword'
-require 'lib/models/search_term'
-require 'lib/models/keyword_association'
-require 'lib/responder'
-require 'lib/feed_parser'
-require 'lib/ws_daily_feeder'
+require File.join(File.dirname(__FILE__), 'config', 'config')
+require File.join(File.dirname(__FILE__), 'lib', 'models', 'wine')
+require File.join(File.dirname(__FILE__), 'lib','models', 'feed')
+require File.join(File.dirname(__FILE__), 'lib', 'models','response')
+require File.join(File.dirname(__FILE__), 'lib', 'models', 'keyword')
+require File.join(File.dirname(__FILE__), 'lib', 'models', 'search_term')
+require File.join(File.dirname(__FILE__), 'lib', 'models', 'keyword_association')
+require File.join(File.dirname(__FILE__), 'lib', 'responder')
+require File.join(File.dirname(__FILE__), 'lib', 'feed_parser')
+require File.join(File.dirname(__FILE__), 'lib', 'ws_daily_feeder')
 
 module Winebot
   def self.feed_queue
@@ -52,7 +52,6 @@ module Winebot
   def self.runner
     self.db_setup
     loop do 
-      puts self.last_id
       Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
         self.send_response(new_request)
         self.set_last_id(new_request["id"])
