@@ -27,7 +27,7 @@ class Response
   end
 
   def search_result(search_string)
-    wines = Wine.search(:full_description => search_string)
+    wines = Wine.search(:conditions => [:in, :full_description, search_string])
     wines.length > 0 ? wines[0] : nil
   end
 
@@ -36,6 +36,6 @@ class Response
   end
 
   def default_search
-    "brut"
+    "full"
   end
 end

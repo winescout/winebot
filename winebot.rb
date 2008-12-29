@@ -32,7 +32,7 @@ module Winebot
 
   def self.last_id
     id = 1052887557 #just a default
-    File.open("./last_id", "r") do |f|
+    File.open("./config/last_id", "r") do |f|
       id = f.read
     end rescue nil
     return id
@@ -52,6 +52,7 @@ module Winebot
   def self.runner
     self.db_setup
     loop do 
+      puts self.last_id
       Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
         self.send_response(new_request)
         self.set_last_id(new_request["id"])

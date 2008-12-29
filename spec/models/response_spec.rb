@@ -34,9 +34,9 @@ describe Response do
     end
     
     it "should do default search if can't find wine" do 
-      Wine.should_receive(:search).with(:full_description => "first_keyword second_keyword").and_return([])
+      Wine.should_receive(:search).with(:conditions => [:in, :full_description, "first_keyword second_keyword"]).and_return([])
       @response.should_receive(:default_search).and_return("brut")
-      Wine.should_receive(:search).with(:full_description => "brut")
+      Wine.should_receive(:search).with(:conditions => [:in, :full_description, "brut"])
       @response.suggestion
     end
   end
