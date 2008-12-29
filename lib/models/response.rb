@@ -20,7 +20,7 @@ module Winebot
         t = SearchTerm.first(:term => term)
         t.keywords if t
       end
-      keyword_list.flatten!.compact!      
+      keyword_list = keyword_list.flatten.compact
       update_my_keywords(keyword_list)
       wine = search_result(self.keywords)
       wine = search_result(default_search) unless wine

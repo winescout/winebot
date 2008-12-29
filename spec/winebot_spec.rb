@@ -7,13 +7,6 @@ describe Winebot do
     Winebot.stub!(:send_response)
   end
 
-  describe "runner" do
-    it "should  setup Twitter" do
-      @search.should_receive(:each)
-      Winebot.runner
-    end
-  end
-
   describe "scheduling" do 
     before do 
       @beanstalk = mock(Beanstalk,

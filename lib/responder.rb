@@ -2,7 +2,7 @@ module Winebot
   class Responder
     def initialize(input)
       @input = input
-      @response = Response.new(input)
+      @response = Response.new(:request => input)
     end
 
     def to_s 
