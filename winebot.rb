@@ -30,22 +30,8 @@ module Winebot
     return @beanstalk
   end
   
-  def self.last_id_file
-    File.join(File.dirname(__FILE__), "config", "last_id")
-  end
-
   def self.last_id
-    id = 1052887557 #just a default
-    File.open(last_id_file, "r") do |f|
-      id = f.read
-    end rescue nil
-    return id
-  end
-
-  def self.set_last_id id
-    File.open(last_id_file, "w") do |f|
-      f.write(id)
-    end
+    Twitter::Search.new.from(configatron.twittername).per_page(1).fetch["max_id"]
   end
   
   def self.db_setup
@@ -58,9 +44,8 @@ module Winebot
     loop do 
       Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
         self.send_response(new_request)
-        self.set_last_id(new_request["id"])
       end
-      sleep 2
+      sleep 4
     end
   end
   
