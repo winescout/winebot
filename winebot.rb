@@ -29,17 +29,21 @@ module Winebot
     end
     return @beanstalk
   end
+  
+  def self.last_id_file
+    File.join(File.dirname(__FILE__), "config", "last_id")
+  end
 
   def self.last_id
     id = 1052887557 #just a default
-    File.open("./config/last_id", "r") do |f|
+    File.open(last_id_file, "r") do |f|
       id = f.read
     end rescue nil
     return id
   end
 
   def self.set_last_id id
-    File.open("./config/last_id", "w") do |f|
+    File.open(last_id_file, "w") do |f|
       f.write(id)
     end
   end
