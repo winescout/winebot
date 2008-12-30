@@ -52,6 +52,7 @@ module Winebot
   def self.send_response(request)
     responder = Twitter::Base.new(configatron.twittername, configatron.password)
     responder.update("@#{request["from_user"]} #{self.response(request)}")
+    responder.follow(request["from_user"])
   end
   
   def self.response(request)
