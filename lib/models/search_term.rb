@@ -6,4 +6,6 @@ class SearchTerm
   
   has n, :keyword_associations
   has n, :keywords, :through => :keyword_associations
+
+  validates_is_unique :term
 end
