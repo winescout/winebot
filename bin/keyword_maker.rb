@@ -7,11 +7,11 @@ class UserInput
 
   def initialize
     STDOUT.flush
-    @entered_string = gets
+    @entered_string = gets.strip
   end
 
   def to_s
-    @entered_string.strip
+    @entered_string
   end
 end
 
