@@ -27,7 +27,9 @@ class Response
   end
 
   def search_result(search_string)
-    wines = Wine.search(:conditions => [:in, :full_description, search_string])
+    #TODO: ranking search is still broken
+    #wines = Wine.search(:conditions => [:in, :full_description, search_string])
+    wines = Wine.search(:conditions => :full_description => search_string.split(" ")[0])
     wines.length > 0 ? wines[0] : nil
   end
 
