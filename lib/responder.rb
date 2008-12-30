@@ -5,6 +5,6 @@ class Responder
   end
 
   def to_s 
-    "#{@response.suggestion.text} How about this wine?- #{@response.suggestion.url}"
+    "How about this wine?- #{@response.suggestion.text} #{@response.suggestion.url}"
   end
 end
