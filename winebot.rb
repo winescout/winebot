@@ -17,7 +17,7 @@ require File.join(File.dirname(__FILE__), 'lib', 'models', 'search_term')
 require File.join(File.dirname(__FILE__), 'lib', 'models', 'keyword_association')
 require File.join(File.dirname(__FILE__), 'lib', 'responder')
 require File.join(File.dirname(__FILE__), 'lib', 'feed_parser')
-require File.join(File.dirname(__FILE__), 'lib', 'ws_daily_feeder')
+require File.join(File.dirname(__FILE__), 'lib', 'generic_rss_feeder')
 
 module Winebot
   def self.feed_queue

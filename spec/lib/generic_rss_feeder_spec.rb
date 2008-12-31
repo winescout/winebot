@@ -1,14 +1,14 @@
 require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 require 'digest/sha1'
 
-describe WSDailyFeeder do 
+describe GenericRssFeeder do 
   before do 
     @item = mock("RSS parsed item",
                  :title => "title",
                  :link  => "url link",
                  :description => "desc",
                  :pubDate => Time.now)
-    @feeder = WSDailyFeeder.new(@item)
+    @feeder = GenericRssFeeder.new(@item)
   end
 
   it "should parse unique_key" do 

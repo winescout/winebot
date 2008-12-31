@@ -1,4 +1,4 @@
-class WSDailyFeeder < FeedParser
+class GenericRssFeeder < FeedParser
   def unique_key
     Digest::SHA1.hexdigest(self.item.title)
   end
