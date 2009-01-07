@@ -4,6 +4,10 @@ class FeedParser
     @item = item
   end
 
+  def is_wine_review?
+    true #this is for feeds that aren't always wine reviews, we can weed out the noise
+  end
+
   def unique_key
     raise "unique_key accessor Not Implimented"
   end

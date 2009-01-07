@@ -17,6 +17,7 @@ describe Feed do
       
       @handler = mock(TestHandler,
                       :unique_key => nil,
+                      :is_wine_review? => true,
                       :text       => nil,
                       :full_description => nil,
                       :url        => nil)
@@ -24,7 +25,7 @@ describe Feed do
 
       Wine.stub!(:create)
     end
-    
+
     it "should pull the feed" do 
       @feed.should_receive(:items).and_return(@parsed_items)
       @feed.fetch_wines
@@ -37,6 +38,12 @@ describe Feed do
 
     it "should attempt to create a new wine for each item" do 
       Wine.should_receive(:create)
+      @feed.fetch_wines
+    end
+
+    it "should ignore items that are not wine_reviews" do 
+      @handler.should_receive(:is_wine_review?).any_number_of_times.and_return(false)
+      Wine.should_not_receive(:create)
       @feed.fetch_wines
     end
 

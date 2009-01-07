@@ -1,7 +1,9 @@
 class Wine
   include DataMapper::Resource
-  is :searchable, :repository => :search
+  include DataMapper::SphinxResource
 
+  is :searchable, :repository => :search
+  #attribute :relevance, String, :lazy => true
   property :id,         Integer, :serial => true
   property :unique_key, String
   property :text,       String, :length => 140

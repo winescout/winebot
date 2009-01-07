@@ -17,6 +17,7 @@ class Feed
       details = job.ybody
       feed = Feed.first(:id => details[:id])
       feed.fetch_wines
+      job.delete
     end
   end
 
@@ -24,10 +25,12 @@ class Feed
     klass = eval self.feed_handler
     items.collect do |item|
       p = klass.new(item)
-      Wine.create(:unique_key       => p.unique_key,
-                  :text             => p.text,
-                  :full_description => p.full_description,
-                  :url              => p.url)
+      if p.is_wine_review? 
+        Wine.create(:unique_key       => p.unique_key,
+                    :text             => p.text,
+                    :full_description => p.full_description,
+                    :url              => p.url).inspect
+      end
     end
     reschedule
   end
