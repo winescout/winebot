@@ -14,7 +14,7 @@ describe Response do
     SearchTerm.stub!(:first).with(:term => "keyword").and_return(@search_term)
     
     @wine = Wine.new
-    Wine.stub!(:search).and_return([@wine])
+    Wine.stub!(:all).and_return([@wine])
   end
 
   describe "search_string" do 
@@ -33,13 +33,11 @@ describe Response do
       @response.should_receive(:keywords=).with("first_keyword second_keyword")
       @response.suggestion
     end
-    
-    #TODO - get contextual search going
-    #it "should do default search if can't find wine" do 
-    #  Wine.should_receive(:search).with(:conditions => [:in, :full_description, "first_keyword second_keyword"]).and_return([])
-    #  @response.should_receive(:default_search).and_return("brut")
-    #  Wine.should_receive(:search).with(:conditions => [:in, :full_description, "brut"])
-    #  @response.suggestion
-    #end
+
+    it "should not do search with empty search_terms" do 
+      @search_term.should_receive(:keywords).and_return([])
+      @response.should_not_receive(:search_result).with("")
+      @response.suggestion
+    end
   end
 end

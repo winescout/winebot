@@ -2,9 +2,7 @@ require 'rubygems'
 require 'twitter'
 require 'dm-core'
 require 'dm-validations'
-#require 'dm-more'
-require 'dm-is-searchable'
-require 'dm-sphinx-adapter'
+require 'dm-solr-adapter'
 require 'configatron'
 require 'beanstalk-client'
 
@@ -18,7 +16,6 @@ require File.join(File.dirname(__FILE__), 'lib', 'models', 'keyword_association'
 require File.join(File.dirname(__FILE__), 'lib', 'responder')
 require File.join(File.dirname(__FILE__), 'lib', 'feed_parser')
 require File.join(File.dirname(__FILE__), 'lib', 'generic_rss_feeder')
-require File.join(File.dirname(__FILE__), 'lib', 'datamapper_query')
 
 module Winebot
   def self.feed_queue
@@ -37,7 +34,11 @@ module Winebot
   
   def self.db_setup
     DataMapper.setup(:default, "#{configatron.db_adapter}://#{configatron.db_username}:#{configatron.db_password}@#{configatron.db_server}/#{configatron.db_name}")
-    DataMapper.setup(:search, 'sphinx://localhost:3312')
+    DataMapper.setup(:search, { 
+                       :adapter => "solr",
+                       :host    => "localhost",
+                       :port    => "8983",
+                       :index   => "/solr"})
   end
 
   def self.runner

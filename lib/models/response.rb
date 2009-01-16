@@ -21,14 +21,13 @@ class Response
     end
     keyword_list = keyword_list.flatten.compact
     update_my_keywords(keyword_list)
-    wine = search_result(self.keywords)
+    wine = search_result(self.keywords) unless self.keywords == "" #handle no keywords
     wine = search_result(default_search) unless wine
     return wine
   end
 
   def search_result(search_string)
-    wines = Wine.search(:conditions => ["@full_description \"#{search_string}\"/2"])
-    #wines = Wine.search(:full_description => search_string.split(" ")[0])
+    wines = Wine.all(:full_description => search_string)
     wines.length > 0 ? wines[0] : nil
   end
 
