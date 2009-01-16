@@ -18,6 +18,11 @@ require File.join(File.dirname(__FILE__), 'lib', 'feed_parser')
 require File.join(File.dirname(__FILE__), 'lib', 'generic_rss_feeder')
 
 module Winebot
+
+  SOLR_PORT = configatron.solr_port
+  SOLR_PATH = configatron.solr_path
+  SOLR_PID = configatron.solr_pid
+
   def self.feed_queue
     unless @beanstalk 
       @beanstalk = Beanstalk::Pool.new(['localhost:11300'])

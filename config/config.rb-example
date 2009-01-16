@@ -8,3 +8,8 @@ configatron.db_server = 'localhost'
 configatron.db_name = 'winebot'
 configatron.db_username = 'username'
 configatron.db_password = 'p@ssw0rd'
+
+# SOLR
+configatron.solr_port = "8983"
+configatron.solr_path = "/path/to/running/solr/instance"
+configatron.solr_pid  = "/path/to/pidfile/for/solr"

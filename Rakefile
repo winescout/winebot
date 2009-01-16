@@ -10,3 +10,26 @@ task :check_feeds do
   Feed.monitor_all
 end
 
+namespace :solr do 
+  desc 'Starts Solr'
+  task :start do 
+    begin
+      n = Net::HTTP.new('localhost', Winebot::SOLR_PORT)
+      n.request_head('/').value
+      
+    rescue Net::HTTPServerException #responding
+      puts "Port #{Winebot::SOLR_PORT} in use" and return
+      
+    rescue Errno::ECONNREFUSED #not responding
+      Dir.chdir(Winebot::SOLR_PATH) do
+        pid = fork do
+          #STDERR.close
+          `java -Djetty.port=#{Winebot::SOLR_PORT} -jar start.jar`
+        end
+        sleep(5)
+        File.open(Winebot::SOLR_PID, "w"){ |f| f << pid}
+        puts "Solr started successfully on #{Winebot::SOLR_PORT}, pid: #{pid}."
+      end
+    end
+  end
+end
