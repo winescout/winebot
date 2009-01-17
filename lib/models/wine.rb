@@ -1,5 +1,5 @@
 class Wine
-  include DataMapper::Resource
+  include DataMapper::SolrResource
   def self.default_repository_name
     :search
   end
