@@ -5,8 +5,8 @@ class Wine
   end
 
   property :id,               Integer
-  property :url,              String, :key => true, :length => 255
-  property :unique_key,       String, :length => 255
+  property :url,              String, :length => 255
+  property :unique_key,       String, :length => 50, :key => true,
   property :text,             String, :length => 140
   property :full_description, String, :length => 1000
   property :created_at,       DateTime
