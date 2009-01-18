@@ -25,11 +25,11 @@ class Feed
     klass = eval self.feed_handler
     items.collect do |item|
       p = klass.new(item)
-      if p.is_wine_review? 
+      if p.is_wine_review? && Wine.all(:unique_key => p.unique_key).empty?
         Wine.create(:unique_key       => p.unique_key,
                     :text             => p.text,
                     :full_description => p.full_description,
-                    :url              => p.url).inspect
+                    :url              => p.url)
       end
     end
     reschedule

@@ -24,6 +24,7 @@ describe Feed do
       TestHandler.stub!(:new).and_return(@handler)
 
       Wine.stub!(:create)
+      Wine.stub!(:all).and_return([])
     end
 
     it "should pull the feed" do 
