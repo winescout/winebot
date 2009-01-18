@@ -267,7 +267,7 @@
 
    <field name="solr_id" type="string" indexed="true" stored="true" required="true"/>
    <field name="solr_type" type="string" indexed="true" stored="true" required="true"/>
-   
+   <field name="unique_key" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="text" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="url" type="text" indexed="true" stored="true" multiValued="true"/>
    <field name="full_description" type="text" indexed="true" stored="true" multiValued="true"/>
