@@ -1,4 +1,4 @@
-require 'twitterbot'
+require File.join(File.dirname(__FILE__), "twitterbot")
 
 module Winebot
 
