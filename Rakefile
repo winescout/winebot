@@ -1,5 +1,6 @@
 require 'rake'
 require(File.join(File.dirname(__FILE__), 'winebot'))
+require(File.join(File.dirname(__FILE__), 'monopolybot'))
 
 task :listen do 
   Winebot.runner
@@ -31,5 +32,13 @@ namespace :solr do
         puts "Solr started successfully on #{Winebot::SOLR_PORT}, pid: #{pid}."
       end
     end
+  end
+end
+
+desc 'Tasks to run the Monopolybot'
+namespace :monopolybot do
+  desc 'start up the listener'
+  task :listen do 
+    Monopolybot.runner
   end
 end

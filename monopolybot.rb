@@ -24,9 +24,9 @@ module Monopolybot
   
   def self.send_response(request)
     puts "@#{request["from_user"]} #{self.response(request)}"
-    #responder = Twitter::Base.new(configatron.monopolybot_twittername, configatron.monopolybot_password)
-    #responder.update("@#{request["from_user"]} #{self.response(request)}")
-    #responder.follow(request["from_user"])
+    responder = Twitter::Base.new(configatron.monopolybot_twittername, configatron.monopolybot_password)
+    responder.update("@#{request["from_user"]} #{self.response(request)}")
+    responder.follow(request["from_user"])
   end
   
   def self.response(request)
