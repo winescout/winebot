@@ -35,7 +35,7 @@ module Winebot
       Twitter::Search.new.since(self.last_id).to(configatron.twittername).each do |new_request|
         self.send_response(new_request)
       end
-      sleep 4
+      sleep 8
     end
   end
   

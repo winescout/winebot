@@ -18,13 +18,12 @@ module Monopolybot
       Twitter::Search.new("monopoly").since(self.last_id).each do |new_request|
         self.send_response(new_request)
       end
-      sleep 4
+      sleep 8
     end
   end
   
   def self.send_response(request)
-    s = "@#{request["from_user"]} #{self.response(request)}"
-    puts "{s.size}"
+    puts "@#{request["from_user"]} #{self.response(request)}"
     #responder = Twitter::Base.new(configatron.monopolybot_twittername, configatron.monopolybot_password)
     #responder.update("@#{request["from_user"]} #{self.response(request)}")
     #responder.follow(request["from_user"])
