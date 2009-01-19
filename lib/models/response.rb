@@ -1,16 +1,27 @@
-class Response
+require 'yaml'
+
+class WinebotResponse
   include DataMapper::Resource
   property :id,       Integer, :serial => true
   property :request,  String
   property :keywords, String
-  property :wine_id,  Integer
+  property :wine_unique_key, String
 
   belongs_to :wine
 
+  def leadin
+    "How about this wine?-"
+  end
+
   def suggestion
-    self.wine = lookup_wine unless wine
+    wine = lookup_wine
+    wine_unique_key = wine.unique_key #record the association
     save
     return wine
+  end
+
+  def to_s 
+    "#{leadin} #{suggestion.text} #{suggestion.url}"
   end
 
   private
@@ -21,14 +32,7 @@ class Response
     end
     keyword_list = keyword_list.flatten.compact
     update_my_keywords(keyword_list)
-    wine = search_result(self.keywords) unless self.keywords == "" #handle no keywords
-    wine = search_result(default_search) unless wine
-    return wine
-  end
-
-  def search_result(search_string)
-    wines = Wine.all(:full_description => search_string)
-    wines.length > 0 ? wines[0] : nil
+    Wine.first(:full_description => "#{keywords} #{default_search}")
   end
 
   def update_my_keywords(keywords)
@@ -39,3 +43,36 @@ class Response
     "full"
   end
 end
+
+
+class MonopolybotResponse
+  class Card
+    def text
+      random_card["text"]
+    end
+
+    private
+    def random_card
+      cards = YAML.load_file(Monopolybot::CARDS)
+      max = cards.count - 1
+      cards.to_a[rand(max)][1]
+    end
+  end
+
+  def initialize(args)
+    @input = args[:request]
+  end
+
+  def leadin
+    "You landed on Chance -"
+  end
+
+  def card
+    Card.new
+  end
+
+  def to_s
+    "#{leadin} #{card.text}"
+  end
+end
+

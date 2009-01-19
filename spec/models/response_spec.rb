@@ -1,9 +1,9 @@
 require File.join(File.dirname(__FILE__), "..", 'spec_helper.rb')
 
-describe Response do 
+describe WinebotResponse do 
   before do 
-    @response = Response.new(:request => "stopword keyword",
-                             :keywords => "")
+    @response = WinebotResponse.new(:request => "stopword keyword",
+                                    :keywords => "")
     SearchTerm.stub!(:first).with(:term => "stopword")
     @search_term = SearchTerm.new
     @keyword_1 = Keyword.new
@@ -34,9 +34,9 @@ describe Response do
       @response.suggestion
     end
 
-    it "should not do search with empty search_terms" do 
+   it "should not do search with empty search_terms" do 
       @search_term.should_receive(:keywords).and_return([])
-      @response.should_not_receive(:search_result).with("")
+      @response.should_not_receive(:first_search_result).with("")
       @response.suggestion
     end
   end

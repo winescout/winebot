@@ -2,6 +2,9 @@
 configatron.twittername = "twittername"
 configatron.password = 'password'
 
+configatron.monopolybot_twittername = "twittername"
+configatron.monopolybot_password    = "password"
+
 # Database
 configatron.db_adapter = 'mysql'
 configatron.db_server = 'localhost'

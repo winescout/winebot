@@ -1,0 +1,28 @@
+utiity:
+  text: Advance Token to Nearest Utility.  If Unowned you may buy it from bank.
+jail:
+  text: To Directly To Jail.  Do Not Pass Go, Do Not Collect $200.
+general_repairs:
+  text: Make General Repairs On All Your Property.  For Each House Pay $25, For Each Hotel $100
+poor_tax:
+  text: Pay Poor Tax of $15
+building_and_loan:
+  text: Your Building And Loan Matures.  Collect $150
+chairman_of_the_board:
+  text: You Have Been Elected Chairman Of The Board.  Pay Each Player $50
+st_charles_place:
+  text: Advance To St. Charles Place.  If You Pass Go, Collect $200
+reading:
+  text: Take A Ride On the Reading.  If You Pass Go, Collect $200
+get_out_of_jail:
+  text: Get Out Of Jail Free.  This Card May Be Kept Until Needed or Sold.
+boardwalk:
+  text: Take a Walk on the Boardwalk.  Advance Token to Board Walk
+advance_to_go:
+  text: Advance to GO.  Collect $200
+illinois_ave:
+  text: Advance To Illinois Ave.
+nearest_railroad:
+  text: Advance token to the nearest Railroad and pay owner Twice the Rentall to which otherwise entitled.
+dividend:
+  text: Bank Pays You Dividend of $50
