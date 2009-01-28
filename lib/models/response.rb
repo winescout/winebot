@@ -7,8 +7,6 @@ class WinebotResponse
   property :keywords, String
   property :wine_unique_key, String
 
-  belongs_to :wine
-
   def leadin
     "How about this wine?-"
   end

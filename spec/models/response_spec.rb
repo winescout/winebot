@@ -15,6 +15,7 @@ describe WinebotResponse do
     
     @wine = Wine.new
     Wine.stub!(:all).and_return([@wine])
+    Wine.stub!(:first).and_return(@wine)
   end
 
   describe "search_string" do 

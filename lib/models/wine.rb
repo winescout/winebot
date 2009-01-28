@@ -10,5 +10,4 @@ class Wine
   property :text,             String, :length => 140
   property :full_description, String, :length => 1000
   property :created_at,       DateTime
-
 end
